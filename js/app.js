@@ -22,7 +22,7 @@ $(document).ready(function () {
 	});
 });
 
-var newGame = new GameBoard();
+//var newGame = new GameBoard();
 
 
 

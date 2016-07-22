@@ -65,7 +65,7 @@ var GameUI = {
 						$(this).addClass("box-filled-1");
 						$(this).unbind('mouseenter mouseleave');
 						this.style.backgroundImage = "url('img/o.svg')";
-						newGame.checkForWin();
+						Game.checkForWin();
 						GameUI.nextTurn();
 					});
 				}
@@ -84,7 +84,7 @@ var GameUI = {
 						$(this).addClass("box-filled-2");
 						$(this).unbind('mouseenter mouseleave');
 						this.style.backgroundImage = "url('img/x.svg')";
-						newGame.checkForWin();
+						Game.checkForWin();
 						GameUI.nextTurn();
 					});
 				}
