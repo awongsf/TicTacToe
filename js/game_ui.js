@@ -1,118 +1,121 @@
-var GameUI = {
-	newGame: function () {
-		$("#start").hide();
-		$("#finish").hide();
-		$("#board").show();
-		$(".box").each(function () {
-			this.style.backgroundImage = "none";
-			$(this).removeClass("box-filled-1");
-			$(this).removeClass("box-filled-2");
-		});
-		$("#player2").removeClass("active");
-		$("#player1").addClass("active");
-	},
+// var GameUI = {
+// 	newGame: function () {
 
-	beginTurn: function () {
+// 		$("#start").hide();
+// 		$("#finish").hide();
+// 		$("#board").show();
+// 		$(".box").each(function () {
+// 			this.style.backgroundImage = "none";
+// 			$(this).removeClass("box-filled-1");
+// 			$(this).removeClass("box-filled-2");
+// 		});
+// 		$("#player2").removeClass("active");
+// 		$("#player1").addClass("active");
+// 	},
 
-		$(".box").each(function () {
+// 	beginTurn: function () {
 
-			$(this).unbind();
+// 		$(".box").each(function () {
 
-			if ($(this).hasClass("box-filled-1") === false && $(this).hasClass("box-filled-2") === false) {
+// 			$(this).unbind();
 
-				if ($("#player1").hasClass("active")) {
+// 			if ($(this).hasClass("box-filled-1") === false && $(this).hasClass("box-filled-2") === false) {
 
-					console.log("Set hover 1");
+// 				if ($("#player1").hasClass("active")) {
 
-					$(this).hover(
+// 					console.log("Set hover 1");
 
-						function () {
-							this.style.backgroundImage = "url('img/o.svg')";
-						}, function () {
-							this.style.backgroundImage = "none";
-						}
-					);
-				} else if ($("#player2").hasClass("active")) {
+// 					$(this).hover(
 
-					console.log("Set hover 2");
+// 						function () {
+// 							this.style.backgroundImage = "url('img/o.svg')";
+// 						}, function () {
+// 							this.style.backgroundImage = "none";
+// 						}
+// 					);
+// 				} else if ($("#player2").hasClass("active")) {
 
-					$(this).hover(
+// 					console.log("Set hover 2");
 
-						function () {
-							this.style.backgroundImage = "url('img/x.svg')";
-						}, function () {
-							this.style.backgroundImage = "none";
-						}
-					);
-				}
-			}
-		});
+// 					$(this).hover(
 
-		GameUI.play();
-	},
-	play: function () {
+// 						function () {
+// 							this.style.backgroundImage = "url('img/x.svg')";
+// 						}, function () {
+// 							this.style.backgroundImage = "none";
+// 						}
+// 					);
+// 				}
+// 			}
+// 		});
 
-		if ($("#player1").hasClass("active")) {
+// 		GameUI.play();
+// 	},
 
-			console.log("Play 1");
+// 	play: function () {
 
-			$(".box").each(function () {
+// 		if ($("#player1").hasClass("active")) {
 
-				if ($(this).hasClass("box-filled-1") === false && $(this).hasClass("box-filled-2") === false) {
+// 			console.log("Play 1");
 
-					$(this).click(function () {
+// 			$(".box").each(function () {
 
-						$(this).addClass("box-filled-1");
-						$(this).unbind('mouseenter mouseleave');
-						this.style.backgroundImage = "url('img/o.svg')";
-						Game.checkForWin();
-						GameUI.nextTurn();
-					});
-				}
-			});
+// 				if ($(this).hasClass("box-filled-1") === false && $(this).hasClass("box-filled-2") === false) {
 
-		} else if ($("#player2").hasClass("active")) {
+// 					$(this).click(function () {
 
-			console.log("Play 2");
+// 						$(this).addClass("box-filled-1");
+// 						$(this).unbind('mouseenter mouseleave');
+// 						this.style.backgroundImage = "url('img/o.svg')";
+// 						Game.checkForWin();
+// 						GameUI.nextTurn();
+// 					});
+// 				}
+// 			});
 
-			$(".box").each(function () {
+// 		} else if ($("#player2").hasClass("active")) {
 
-				if ($(this).hasClass("box-filled-1") === false && $(this).hasClass("box-filled-2") === false) {
+// 			console.log("Play 2");
 
-					$(this).click(function () {
+// 			$(".box").each(function () {
 
-						$(this).addClass("box-filled-2");
-						$(this).unbind('mouseenter mouseleave');
-						this.style.backgroundImage = "url('img/x.svg')";
-						Game.checkForWin();
-						GameUI.nextTurn();
-					});
-				}
-			});	
-		}
-	},
-	nextTurn: function () {
+// 				if ($(this).hasClass("box-filled-1") === false && $(this).hasClass("box-filled-2") === false) {
 
-		if ($("#player1").hasClass("active")) {
+// 					$(this).click(function () {
 
-			console.log("Next turn 1");
+// 						$(this).addClass("box-filled-2");
+// 						$(this).unbind('mouseenter mouseleave');
+// 						this.style.backgroundImage = "url('img/x.svg')";
+// 						Game.checkForWin();
+// 						GameUI.nextTurn();
+// 					});
+// 				}
+// 			});	
+// 		}
+// 	},
 
-			$("#player1").removeClass("active");
-			$("#player2").addClass("active");
+// 	nextTurn: function () {
 
-			GameUI.beginTurn();
+// 		if ($("#player1").hasClass("active")) {
 
-		} else if ($("#player2").hasClass("active")) {
+// 			console.log("Next turn 1");
 
-			console.log("Next turn 2");
+// 			$("#player1").removeClass("active");
+// 			$("#player2").addClass("active");
 
-			$("#player2").removeClass("active");
-			$("#player1").addClass("active");
+// 			GameUI.beginTurn();
 
-			GameUI.beginTurn();
+// 		} else if ($("#player2").hasClass("active")) {
 
-		} else {
-			console.log("No more turns!");
-		}
-	}
-};
+// 			console.log("Next turn 2");
+
+// 			$("#player2").removeClass("active");
+// 			$("#player1").addClass("active");
+
+// 			GameUI.beginTurn();
+
+// 		} else {
+// 			console.log("No more turns!");
+// 		}
+// 	}
+// };
