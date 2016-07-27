@@ -1,6 +1,13 @@
 var gameModule = (function(Game){
 
-	var Game = { winner: "" };
+	var Game = { 
+		winner: "",
+		username: ""
+	};
+
+	Game.getUsername = function () {
+		Game.username = $("#start > header > input[type='text']").val();
+	}
 
 	Game.newGame = function () {
 
@@ -123,19 +130,18 @@ var gameModule = (function(Game){
 	}
 
 	Game.checkForWin = function () {
-		var boxes = [];
-		boxes = $(".box").toArray();
+
 		var check = [];
 
-		for (i = 0; i < boxes.length; i++) {
-			if (boxes[i].className.includes("box-filled-1")) {
+		$(".box").each(function () {
+			if ($(this).hasClass("box-filled-1")) {
 				check.push("player1");
-			} else if (boxes[i].className.includes("box-filled-2")) {
+			} else if ($(this).hasClass("box-filled-2")) {
 				check.push("player2");
 			} else {
 				check.push("empty");
 			}
-		}
+		});
 		
 		if (check[0] !== "empty" && check[0] === check[1] && check[1] === check[2]) {
 
@@ -189,7 +195,7 @@ var gameModule = (function(Game){
 
 			$("#finish").removeClass("screen-win-two");
 			$("#finish").removeClass("screen-win-tie");
-			$(".message").html("Winner");
+			$(".message").html(Game.username + " wins!");
 			$("#finish").addClass("screen-win-one");
 			$("#finish").show();
 			$("#board").hide();
@@ -198,7 +204,7 @@ var gameModule = (function(Game){
 
 			$("#finish").removeClass("screen-win-one");
 			$("#finish").removeClass("screen-win-tie");
-			$(".message").html("Winner");
+			$(".message").html("CPU wins!");
 			$("#finish").addClass("screen-win-two");
 			$("#finish").show();
 			$("#board").hide();

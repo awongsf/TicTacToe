@@ -25,6 +25,22 @@ var gameModule = (function(Game){
 			"width": "250px"
 		});
 		$("a.button").click(function () {
+			if (Game.username == "") {
+				Game.getUsername();
+				var usernamesHTML = "<h1>" + Game.username + "</h1>";
+				usernamesHTML += "<h1>CPU</h1>";
+				$("#board > header").append(usernamesHTML);
+				$("#board > header > h1:nth-child(3)").css({
+					"left": "2.5%",
+					"position": "absolute",
+					"top": "6rem"
+				});
+				$("#board > header > h1:nth-child(4)").css({
+					"right": "3%",
+					"position": "absolute",
+					"top": "6rem"
+				});
+			}
 			Game.newGame();
 			Game.beginTurn();
 		});
