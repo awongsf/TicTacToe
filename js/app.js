@@ -1,6 +1,9 @@
 var gameModule = (function(Game){
 
 	$(document).ready(function () {
+
+		// Create and append HTML for start screen and finish screen.
+		// Hide board screen and finish screen.
 		$("#board").hide();
 		var finishHTML = "<div class='screen screen-win' id='finish'>";
 		finishHTML += "<header>";
@@ -19,11 +22,17 @@ var gameModule = (function(Game){
 		startHTML += "</header>";
 		startHTML += "</div>";
 		$("body").append(startHTML);
+
+		// Set width and position the username input in start screen
 		$("#start > header > input[type='text']").css({
 			"margin": "50px 0",
 			"text-align": "center",
 			"width": "250px"
 		});
+
+		// When user clicks 'Start game' or 'New game' button,
+		// get username, display it on board screen, and
+		// begin a new game.
 		$("a.button").click(function () {
 			if (Game.username == "") {
 				Game.getUsername();

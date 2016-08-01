@@ -1,16 +1,23 @@
 var gameModule = (function(Game){
 
+	// Create Game object with winner and username properties
+	// set to blank string.
 	var Game = { 
 		winner: "",
 		username: ""
 	};
 
+	// Get value of username input in start screen
 	Game.getUsername = function () {
 		Game.username = $("#start > header > input[type='text']").val();
 	}
 
+	// Start a new game by resetting the winner property,
+	// hiding start and finish screens, resetting all boxes
+	// in game board, and making it Player 1's turn
 	Game.newGame = function () {
 
+		Game.winner = "";
 		$("#start").hide();
 		$("#finish").hide();
 		$("#board").show();
@@ -23,6 +30,7 @@ var gameModule = (function(Game){
 		$("#player1").addClass("active");
 	}
 
+	// Highlight empty squares by active player's symbol
 	Game.beginTurn = function () {
 
 		$(".box").each(function () {
@@ -33,8 +41,6 @@ var gameModule = (function(Game){
 
 				if ($("#player1").hasClass("active")) {
 
-					console.log("Set hover 1");
-
 					$(this).hover(
 
 						function () {
@@ -44,8 +50,6 @@ var gameModule = (function(Game){
 						}
 					);
 				} else if ($("#player2").hasClass("active")) {
-
-					console.log("Set hover 2");
 
 					$(this).hover(
 
@@ -62,6 +66,9 @@ var gameModule = (function(Game){
 		Game.play();
 	}
 
+	// When active player clicks on empty square, fill square with
+	// player's symbol, check for winning combination on board, and 
+	// allow next player to make move
 	Game.play = function () {
 
 		if ($("#player1").hasClass("active")) {
@@ -104,11 +111,11 @@ var gameModule = (function(Game){
 		}
 	}
 
+	// Remove 'active' class from current player and apply it
+	// to the next player
 	Game.nextTurn = function () {
 
 		if ($("#player1").hasClass("active")) {
-
-			console.log("Next turn 1");
 
 			$("#player1").removeClass("active");
 			$("#player2").addClass("active");
@@ -117,18 +124,18 @@ var gameModule = (function(Game){
 
 		} else if ($("#player2").hasClass("active")) {
 
-			console.log("Next turn 2");
-
 			$("#player2").removeClass("active");
 			$("#player1").addClass("active");
 
 			Game.beginTurn();
 
-		} else {
-			console.log("No more turns!");
 		}
 	}
 
+	// Get box states and store in an array
+	// Check array for a winning combination
+	// If there is a winning combination, set value of
+	// winner property and call displayWinner
 	Game.checkForWin = function () {
 
 		var check = [];
@@ -190,6 +197,7 @@ var gameModule = (function(Game){
 		}
 	}
 
+	// Show finish screen and style it according to value of winner
 	Game.displayWinner = function () {
 		if (Game.winner === "player1") {
 
