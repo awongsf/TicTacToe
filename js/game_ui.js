@@ -2,15 +2,23 @@ var gameModule = (function(Game){
 
 	// Create Game object with winner and username properties
 	// set to blank string.
-	var Game = { 
+	Game = { 
 		winner: "",
-		username: ""
+		playerOne: "",
+		playerTwo: "",
 	};
 
 	// Get value of username input in start screen
 	Game.getUsername = function () {
-		Game.username = $("#start > header > input[type='text']").val();
-	}
+		Game.playerOne = $("#start > header > input[name='username1']").val();
+		Game.playerTwo = $("#start > header > input[name='username2']").val();
+		if (Game.playerOne === "") {
+			Game.playerOne = "Player One";
+		}
+		if (Game.playerTwo === "") {
+			Game.playerTwo = "Player Two";
+		}
+	};
 
 	// Start a new game by resetting the winner property,
 	// hiding start and finish screens, resetting all boxes
@@ -28,7 +36,7 @@ var gameModule = (function(Game){
 		});
 		$("#player2").removeClass("active");
 		$("#player1").addClass("active");
-	}
+	};
 
 	// Highlight empty squares by active player's symbol
 	Game.beginTurn = function () {
@@ -64,7 +72,7 @@ var gameModule = (function(Game){
 		});
 
 		Game.play();
-	}
+	};
 
 	// When active player clicks on empty square, fill square with
 	// player's symbol, check for winning combination on board, and 
@@ -109,7 +117,7 @@ var gameModule = (function(Game){
 				}
 			});	
 		}
-	}
+	};
 
 	// Remove 'active' class from current player and apply it
 	// to the next player
@@ -130,7 +138,7 @@ var gameModule = (function(Game){
 			Game.beginTurn();
 
 		}
-	}
+	};
 
 	// Get box states and store in an array
 	// Check array for a winning combination
@@ -195,7 +203,7 @@ var gameModule = (function(Game){
 			Game.winner = "Tie Game";
 			Game.displayWinner();
 		}
-	}
+	};
 
 	// Show finish screen and style it according to value of winner
 	Game.displayWinner = function () {
@@ -203,7 +211,7 @@ var gameModule = (function(Game){
 
 			$("#finish").removeClass("screen-win-two");
 			$("#finish").removeClass("screen-win-tie");
-			$(".message").html(Game.username + " wins!");
+			$(".message").html(Game.playerOne + " wins!");
 			$("#finish").addClass("screen-win-one");
 			$("#finish").show();
 			$("#board").hide();
@@ -212,7 +220,7 @@ var gameModule = (function(Game){
 
 			$("#finish").removeClass("screen-win-one");
 			$("#finish").removeClass("screen-win-tie");
-			$(".message").html("CPU wins!");
+			$(".message").html(Game.playerTwo + " wins!");
 			$("#finish").addClass("screen-win-two");
 			$("#finish").show();
 			$("#board").hide();
@@ -227,7 +235,7 @@ var gameModule = (function(Game){
 			$("#board").hide();
 
 		}
-	}
+	};
 
 	return Game;
 

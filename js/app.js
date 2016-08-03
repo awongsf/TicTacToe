@@ -9,7 +9,7 @@ var gameModule = (function(Game){
 		finishHTML += "<header>";
 		finishHTML += "<h1>Tic Tac Toe</h1>";
 		finishHTML += "<p class='message'></p>";
-		finishHTML += "<a href='#' class='button'>New game</a>"
+		finishHTML += "<a href='#' class='button'>New game</a>";
 		finishHTML += "</header>";
 		finishHTML += "</div>";
 		$("body").append(finishHTML);
@@ -17,7 +17,8 @@ var gameModule = (function(Game){
 		var startHTML = "<div class='screen screen-start' id='start'>";
 		startHTML += "<header>";
 		startHTML += "<h1>Tic Tac Toe</h1>";
-		startHTML += "<input type='text' placeholder='Please enter your name' name='username'><br>";
+		startHTML += "<input type='text' placeholder='Player 1' name='username1'>";
+		startHTML += "<input type='text' placeholder='Player 2' name='username2'><br>";
 		startHTML += "<a href='#' class='button'>Start game</a>";
 		startHTML += "</header>";
 		startHTML += "</div>";
@@ -25,7 +26,7 @@ var gameModule = (function(Game){
 
 		// Set width and position the username input in start screen
 		$("#start > header > input[type='text']").css({
-			"margin": "50px 0",
+			"margin": "50px",
 			"text-align": "center",
 			"width": "250px"
 		});
@@ -34,10 +35,10 @@ var gameModule = (function(Game){
 		// get username, display it on board screen, and
 		// begin a new game.
 		$("a.button").click(function () {
-			if (Game.username == "") {
+			if (Game.playerOne === "" && Game.playerTwo === "") {
 				Game.getUsername();
-				var usernamesHTML = "<h1>" + Game.username + "</h1>";
-				usernamesHTML += "<h1>CPU</h1>";
+				var usernamesHTML = "<h1>" + Game.playerOne + "</h1>";
+				usernamesHTML += "<h1>" + Game.playerTwo + "</h1>";
 				$("#board > header").append(usernamesHTML);
 				$("#board > header > h1:nth-child(3)").css({
 					"left": "2.5%",
@@ -45,7 +46,7 @@ var gameModule = (function(Game){
 					"top": "6rem"
 				});
 				$("#board > header > h1:nth-child(4)").css({
-					"right": "3%",
+					"right": "7%",
 					"position": "absolute",
 					"top": "6rem"
 				});
